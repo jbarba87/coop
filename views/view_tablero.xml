@@ -1,0 +1,51 @@
+<odoo>
+
+   <!--graph para el socio y camelido del modelo historial -->
+  
+  <record id="act_socio_camelido" model="ir.actions.act_window">
+    <field name="name">Socio camelido</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_mode">graph</field>
+    <field name="view_id" ref="coop.socio_camelido_graph"/>
+  </record>
+
+  <record id="dashboard_form_view" model="ir.ui.view">
+    <field name="name">Dashboard Form </field>
+    <field name="model">board.board</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+      <form string="Dashboard">
+        <board style="2-1">
+          <column>
+            <action string="Socios de Ayacucho con más de 400 alpacas" name="%(coop.act_socio_camelido)d" domain="[('es_socio', '=', True), ('alpacas_total', '>', 400), ('departamento_nac', '=', 'Ayacucho')]"/>
+          </column>
+          <column>
+            <action string="Socios de Ayacucho con menos de 100 alpacas" name="%(coop.act_socio_camelido)d" domain="[('es_socio', '=', True), ('alpacas_total', '&#60;', 100), ('alpacas_total', '!=', 0), ('departamento_nac', '=', 'Ayacucho')]"/>
+          </column>
+
+        </board>
+        <board style="2-1">
+          <column>
+            <action string="Socios de Cusco con más de 400 alpacas" name="%(coop.act_socio_camelido)d" domain="[('es_socio', '=', True), ('alpacas_total', '>', 400), ('departamento_nac', '=', 'Cusco')]"/>
+          </column>
+          <column>
+            <action string="Socios de Cusco con menos de 100 alpacas" name="%(coop.act_socio_camelido)d" domain="[('es_socio', '=', True), ('alpacas_total', '&#60;', 100), ('alpacas_total', '!=', 0), ('departamento_nac', '=', 'Cusco')]"/>
+          </column>
+
+        </board>
+      </form>
+    </field>
+  </record>
+
+
+  <record id="coop_dashboard" model="ir.actions.act_window">
+    <field name="name">Dashboard</field>
+    <field name="res_model">board.board</field>
+    <field name="view_mode">form</field>
+    <field name="usage">menu</field>
+    <field name="view_id" ref="dashboard_form_view"/>
+  </record>
+
+  <menuitem name="Tablero" id="menu_dashboard" sequence="-1" parent="coop_root" action="coop_dashboard" />
+
+</odoo>

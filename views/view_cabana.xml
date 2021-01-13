@@ -1,0 +1,72 @@
+<odoo>
+  <data>
+
+  <record model="ir.ui.view" id="cabana_tree">
+    <field name="name">Cabaña</field>
+    <field name="model">coop.cabana</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="nombre"/>
+        <!-- <field name="comunidad"/>-->
+        <field name="distrito_cab"/>
+        <field name="provincia_cab"/>
+        <field name="departamento_cab"/>
+        <field name="socio_id"/>
+        <field name="num_parcelas"/>
+      </tree>
+    </field>
+  </record>
+
+
+  <record model="ir.ui.view" id="cabana_form">
+    <field name="name">Cabaña</field>
+    <field name="model">coop.cabana</field>
+    <field name="arch" type="xml">
+      <form>
+
+        <sheet>
+          <group>
+            <group>
+              <field name="nombre"/>
+              <field name="socio_id"  domain="[('es_socio', '=', True)]"/>
+              <!-- <field name="comunidad"/>-->
+              <field name="distrito_cab"/>
+              <field name="provincia_cab"/>
+              <field name="departamento_cab"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="Parcelas">
+              <field name="parcelas">
+                <tree editable="bottom">
+                  <field name="nombre_parcela"/>
+                  <field name="num_potreros"/>
+                  <field name="area"/>
+                  <field name="cond_tenencia_tierras"/>
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_cabana" model="ir.actions.act_window">
+    <field name="name">Cabaña</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">coop.cabana</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form,kanban</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Agrege una Cabaña.        
+      </p>
+    </field>
+  </record>
+  
+
+  <menuitem id="coop_cabana" name="Cabañas" parent="coop_root" action="action_cabana"/>
+
+  </data>
+</odoo>

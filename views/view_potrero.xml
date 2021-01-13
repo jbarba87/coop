@@ -1,0 +1,165 @@
+<odoo>
+  <data>
+
+  <record model="ir.ui.view" id="potrero_tree">
+    <field name="name">Potrero</field>
+    <field name="model">coop.potrero</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="nombre_potrero"/>
+<!--        <field name="nombre_socio"/> -->
+        <field name="area"/>
+        <field name="material"/>
+        <field name="area_pasto_natural"/>
+        <field name="area_pasto_cultivado"/>
+<!--                  <field name="total_alpacas_raza"/> -->
+
+      </tree>
+    </field>
+  </record>
+
+
+
+  <record model="ir.ui.view" id="potrero_form">
+    <field name="name">Potrero</field>
+    <field name="model">coop.potrero</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group string="Información general">
+            <group>
+              <field name="nombre_potrero"/>
+              <field name="parcela_id"/>
+              <field name="nombre_socio"/>
+              <field name="area"/>
+              <field name="material"/>
+            </group>
+            <group>
+              <field name="area_pasto_natural"/>
+              <field name="area_bofedales"/>
+              <field name="area_ereazeos"/>
+              <field name="otros"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="Pasto cultivado">
+              <group>
+                <field name="area_pasto_cultivado"/>
+                <field name="tipo_pasto_cultivado"/>
+                <field name="ahno_instalacion"/>
+                <field name="riego_semana"/>
+                <field name="tipo_riego"/>
+                <field name="num_corte"/>
+              </group>
+            </page>
+            <page string="Rendimiento">
+              <group>
+                <field name="peso_x_m2"/>
+                <field name="densidad"/>
+                <field name="longitud"/>
+              </group>
+            </page>
+            <page string="Fuente de Agua">
+              <group>
+                <field name="fuente_agua"/>
+              </group>
+            </page>
+            <page string="Aforo de Agua">
+              <group>
+                <field name="aforo_agua"/>
+                <field name="epoca_lluvia"/>
+                <field name="epoca_estiage"/>
+              </group>
+            </page>
+            <page string="Observaciones">
+              <field name="observaciones"/>
+            </page>
+
+            <page string="Camélidos del potrero">
+              <group>
+                <field name="camelidos">
+                  <tree editable="bottom">
+                    <field name="identificacion"/>
+                    <field name="fecha_nac"/>
+                    <field name="edad"/>
+                    <field name="raza"/>
+                    <field name="color"/>
+                  </tree>
+                </field>
+              </group>
+            </page>
+            <page string="Camelidos">
+              <group>
+                <group string="Clasificación por edad/género">
+                  <field name="alp_macho_adulto"/>
+                  <field name="alp_hembra_adulto"/>
+                  <field name="tui_macho"/>
+                  <field name="tui_hembra"/>
+                  <field name="alp_hembra"/>
+                  <field name="menores"/>
+                  <field name="total_alpacas_gen"/>
+                </group>
+                <group string="Clasificación por raza">
+                  <field name="huacaya"/>
+                  <field name="suri"/>
+<!--                  <field name="total_alpacas_raza"/> -->
+                </group>
+              </group>
+              <group string="Porcentaje de saca">
+                <field name="saca"/>
+                <field name="porc_saca"/>
+              </group>
+            </page>
+            <page string="Historial">
+              <field name="potrero_historial">
+                <tree editable="bottom">
+                  <field name="fecha"/>
+                  <field name="area_pasto_cultivado"/>
+                  <field name="area_pasto_natural"/>
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+        <div class="oe_chatter">
+          <field name="message_follower_ids" widget="mail_followers"/>
+          <field name="activity_ids" widget="mail_activity"/>
+          <field name="message_ids" widget="mail_thread" option="{'post_refresh':'recipients'}"/>
+        </div>
+
+      </form>
+    </field>
+  </record>
+
+  <!-- graph view -->
+  <record id="camelido_graph" model="ir.ui.view">
+    <field name="name">coop.potrero_camelido</field>
+    <field name="model">coop.potrero</field>
+    <field name="arch" type="xml">
+      <graph string="Gráfica">
+        <field name="nombre_potrero"/>
+        <field name="num_camelidos" type="measure"/>
+      </graph>
+    </field>
+  </record>
+
+   
+
+
+  <record id="action_potrero" model="ir.actions.act_window">
+    <field name="name">Potrero</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">coop.potrero</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form,graph</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Agrege una Potrero.        
+      </p>
+    </field>
+  </record>
+  
+  <menuitem id="coop_potrero" name="Potreros" parent="coop_root" action="action_potrero"/>
+
+  </data>
+</odoo>

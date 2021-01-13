@@ -1,0 +1,18 @@
+<odoo>
+  <template id="prueba" name="prueba">
+    <ul>
+        <t t-foreach="socios" t-as="socio">
+          <li>
+            <t t-esc="socio.name" />  <t t-esc="socio.alpacas_total" />
+
+          </li>
+        </t>
+
+    </ul>
+    <h1> Maximo: <t t-esc="maximo" /> </h1>
+    <t t-js="ctx">
+      console.log("Hola", ctx.maximo)
+    </t>
+  </template>
+
+</odoo>

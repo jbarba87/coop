@@ -1,0 +1,179 @@
+<odoo>
+  <data>
+
+  <record model="ir.ui.view" id="camelido_tree">
+    <field name="name">Camelido</field>
+    <field name="model">coop.camelido</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="identificacion"/>
+       <!--  <field name="nombre_socio"/>-->
+        <field name="socio_id"/>
+        <field name="edad"/>
+        <field name="sexo"/>
+        <field name="raza"/>
+        <field name="color"/>
+      </tree>
+    </field>
+  </record>
+
+
+  <record model="ir.ui.view" id="camelido_form">
+    <field name="name">Camelido</field>
+    <field name="model">coop.camelido</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+              <field name="active" widget="boolean_button" options="{&quot;terminology&quot;:&quot;archive&quot;}"/>
+            </button>
+          </div>
+          <group string="Información general">
+            <group>
+              <field name="identificacion"/>
+              <field name="tipo_identificacion"/>
+             <!-- <field name="activo"  widget="boolean_button"/> -->
+              <field name="baja_motivo" attrs="{'invisible':[('active', '=', True)]}"/>
+              <field name="fecha_empadre"/>
+              <field name="fecha_nac"/>
+              <field name="edad"/>
+
+              <field name="socio_id" domain="[('es_socio', '=', True)]"/>
+              <field name="potrero_id"/>
+              <!--<field name="nombre_socio"/> -->
+
+            </group>
+            <group>
+              <field name="sexo" widget="radio"/>
+              <field name="raza"/>
+              <field name="color"/>
+              <field name="categoria"/>
+              <field name="cond_adquisicion"/>
+              <field name="peso"/>
+              <field name="num_esquila"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="Antepasados">
+              <group>
+                <field name="cod_padre"/>
+                <field name="cod_madre"/>
+                <field name="cod_abuelo"/>
+                <field name="cod_abuela"/>
+                <field name="cod_bisabuelo"/>
+                <field name="cod_bisabuela"/>
+              </group>
+            </page>
+            <page string="Características">
+              <group string="Propiedades Físicas">
+
+                 <!--
+                  <table>
+                    <tr>Extrafina &#60; 18u</tr>
+                    <tr>Fina &#62;&#61; 18 &#60;&#61; 22u</tr>
+                    <tr>Media &#62;&#61; 22 &#60; 28u</tr>
+                  </table>
+                  -->
+                <group>
+                  <field name="categoria_vellon_value"/>
+                  <field name="longitud_mecha_value"/>
+                  <field name="densidad_value"/>
+                  <field name="rizo_value"/>
+                  <field name="uniformidad_value"/>
+
+                </group>
+                <group>
+                  <field name="categoria_vellon" nolabel="1"/><br/>
+                  <field name="longitud_mecha" nolabel="1"/><br/>
+                  <field name="densidad" nolabel="1"/><br/>
+                  <field name="rizo_ondulacion" nolabel="1"/><br/>
+                  <field name="uniformidad" nolabel="1"/><br/>
+                </group>
+              </group>
+              
+              <group string="Conformación" col="6">
+                <group colspan="5">
+                  <field name="cabeza_descripcion" placeholder="Ingrese descripción"/>
+                  <field name="talla_descripcion" placeholder="Ingrese descripción"/>
+                  <field name="calze_descripcion" placeholder="Ingrese descripción"/>
+                  <field name="ap_general_descripcion" placeholder="Ingrese descripción"/>
+                </group>
+                <group colspan="1">
+                  <field name="cabeza_value" nolabel="1"/><br/>
+                  <field name="talla_value" nolabel="1"/><br/>
+                  <field name="calze_value" nolabel="1"/><br/>
+                  <field name="ap_general_value" nolabel="1"/><br/>
+                </group>
+              
+              </group>
+              <group string="Puntuación">
+                <field name="general_value"/>
+              </group>
+              
+            </page>
+
+            <page string="Otras observaciones">
+              <group>
+                <field name="defectos"/>
+                <field name="observaciones"/>
+              </group>
+            </page>
+            <page string="Esquilas">
+                <field name="lista_esquilas">
+                  <tree editable="bottom">
+                    <field name="fecha"/>
+                    <field name="estimacion"/>
+                    <field name="produccion"/>
+                  </tree>
+                </field>
+            </page>
+          </notebook>
+        </sheet>
+        <div class="oe_chatter">
+          <field name="message_follower_ids" widget="mail_followers"/>
+          <field name="activity_ids" widget="mail_activity"/>
+          <field name="message_ids" widget="mail_thread" option="{'post_refresh':'recipients'}"/>
+        </div>
+      </form>
+    </field>
+  </record>
+
+    <record id="search_camel_socio" model="ir.ui.view">
+      <field name="name">camel.filter.socio</field>
+      <field name="model">coop.camelido</field>
+      <field name="arch" type="xml">
+        <search string="Busqueda por socio">
+          <field name="identificacion" filter_domain="['|',('identificacion', 'ilike', self),('socio_id.name', 'ilike', self)]" />
+          <field name="socio_id" />
+          <filter string="Archivados" name="archivados" domain="[('active', '=', False)]"/>
+          <separator/>
+          <filter string="Machos" name="machos" domain="[('sexo', '=', 'macho')]"/>
+          <filter string="Hembras" name="hembras" domain="[('sexo', '=', 'hembra')]"/>
+          <separator/>
+          <filter string="Huacayas" name="huacayas" domain="[('raza', '=', 'huacaya')]"/>
+          <filter string="Suris" name="suris" domain="[('raza', '=', 'suri')]"/>
+        </search>
+      </field>
+    </record>
+
+  <record id="action_camelido" model="ir.actions.act_window">
+    <field name="name">Camelido</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">coop.camelido</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Agrege un Camelido.        
+      </p>
+    </field>
+  </record>
+
+  <menuitem id="coop_camelido" name="Camélidos" parent="coop_root" action="action_camelido"/>
+  
+
+  </data>
+</odoo>
+
+

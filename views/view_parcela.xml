@@ -1,0 +1,73 @@
+<odoo>
+  <data>
+
+  <record model="ir.ui.view" id="parcela_tree">
+    <field name="name">Parcela</field>
+    <field name="model">coop.parcela</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="nombre_parcela"/>
+        <field name="cabana_id"/>
+        <field name="nombre_socio"/>
+        <field name="area"/>
+        <field name="cond_tenencia_tierras"/>
+        <field name="num_potreros"/>
+      </tree>
+    </field>
+  </record>
+
+
+  <record model="ir.ui.view" id="parcela_form">
+    <field name="name">Parcela</field>
+    <field name="model">coop.parcela</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group string="Información general">
+            <group>
+              <field name="nombre_parcela"/>
+              <field name="cabana_id"/>
+              <field name="nombre_socio"/>
+              <field name="area"/>
+              <field name="cond_tenencia_tierras"/>
+            </group>
+          </group>
+
+          <notebook>
+            <page string="Potrero">
+              <field name="potreros">
+                <tree editable="bottom">
+                  <field name="nombre_potrero"/>
+                  <field name="area"/>
+                  <field name="material"/>
+                  <field name="area_pasto_natural"/>
+                  <field name="area_pasto_cultivado"/>
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+
+  <record id="action_parcela" model="ir.actions.act_window">
+    <field name="name">Parcela</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">coop.parcela</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Agrege una Parcela.        
+      </p>
+    </field>
+  </record>
+
+  <menuitem id="coop_parcela" name="Parcelas" parent="coop_root" action="action_parcela"/>
+  
+
+  </data>
+</odoo>
+
