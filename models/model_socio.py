@@ -169,7 +169,7 @@ class socio(models.Model):
   #departamento_nac = fields.Selection(departamentos, string = "Departamento")
 
   # Otros datos
-  sexo = fields.Selection([('Masculino', 'Masculino'), ('Femenino', 'Femenino')], default="masculino", string="Sexo")
+  sexo = fields.Selection([('Masculino', 'Masculino'), ('Femenino', 'Femenino')], default="Masculino", string="Sexo")
   
   estado_civil = fields.Selection([
   ('Soltero', 'Soltero'),

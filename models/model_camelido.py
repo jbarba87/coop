@@ -135,30 +135,30 @@ class camelido_andino(models.Model):
   
   # Tipo de identificacion
   tipo_identificacion = fields.Selection([
-    ('tatuaje', 'Tatuaje'),
-    ('arete', 'Arete'),
-    ('senal', 'Señal'),
-    ('otro', 'Otro'),
-  ], default="tatuaje", string="Tipo de identificación", track_visibility="always")
+    ('Tatuaje', 'Tatuaje'),
+    ('Arete', 'Arete'),
+    ('Senal', 'Senal'),
+    ('Otro', 'Otro'),
+  ], default="Tatuaje", string="Tipo de identificación", track_visibility="always")
 
  
   peso = fields.Float(string="Peso (kg)", track_visibility="always")
   
   
   sexo = fields.Selection([
-    ('macho', 'Macho'),
-    ('hembra', 'Hembra'),
-  ], default="hembra", string="Género")
+    ('Macho', 'Macho'),
+    ('Hembra', 'Hembra'),
+  ], default="Hembra", string="Género")
   
   raza = fields.Selection([
-    ('huacaya', 'Huacaya'),
-    ('suri', 'Suri'),
-  ], default="huacaya", string="Raza")
+    ('Huacaya', 'Huacaya'),
+    ('Suri', 'Suri'),
+  ], default="Huacaya", string="Raza")
   
   color = fields.Selection([
-    ('blanco', 'Blanco'),
-    ('color', 'Color'),
-  ], default="blanco", string="Color")
+    ('Blanco', 'Blanco'),
+    ('Color', 'Color'),
+  ], default="Blanco", string="Color")
 
   categoria = fields.Selection([
     ('categoria 1', 'Categoria 1'),
@@ -168,10 +168,11 @@ class camelido_andino(models.Model):
   ], string="Categoria")
 
   cond_adquisicion = fields.Selection([
-    ('alquilado', 'Alquilado'),
-    ('comprado', 'Comprado'),
-    ('trueque', 'Trueque'),
-    ('prestado', 'Prestado'),
+    ('Nacimiento', 'Nacimiento'),
+    ('Alquilado', 'Alquilado'),
+    ('Comprado', 'Comprado'),
+    ('Trueque', 'Trueque'),
+    ('Prestado', 'Prestado'),
   ], string="Condición de adquisición")
 
   num_esquila = fields.Integer(string="Número de esquila", compute="contar_esquilas")
@@ -184,8 +185,8 @@ class camelido_andino(models.Model):
   active = fields.Boolean(default=True, string='Active')
   
   baja_motivo = fields.Selection([
-    ('muerte', 'Muerte'),
-    ('transferencia', 'Transferencia'),
+    ('Muerte', 'Muerte'),
+    ('Transferencia', 'Transferencia'),
   ], string="Motivo")
 
 
@@ -217,8 +218,8 @@ class camelido_andino(models.Model):
   rizo_value = fields.Selection([(x, str(x)) for x in range(0, 9)], string="Rizo")
 
   uniformidad = fields.Selection([
-    ('homogeneo', 'Homogéneo'),
-    ('no homogeneo', 'Falta homogeneidad'),
+    ('Homogeneo', 'Homogeneo'),
+    ('No homogeneidad', 'No homogeneidad'),
   ], string="Uniformidad", compute="select_uniformidad")
   uniformidad_value = fields.Selection([(x, str(x)) for x in range(0, 5)], string="Uniformidad")
 
