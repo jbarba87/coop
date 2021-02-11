@@ -44,7 +44,7 @@ class parcela(models.Model):
     ('Comunero', 'Comunero'),
     ('Alquilado', 'Alquilado'),
     ('otro', 'Otro'),
-  ], default="posesionario", string="Condicion de tenencia de tierras")
+  ], string="Condicion de tenencia de tierras")
 
   # Campos computados
   num_potreros = fields.Integer(string="Cantidad potreros", compute="count_potreros", store=True)

@@ -46,6 +46,14 @@
                 </tree>
               </field>
             </page>
+            <page string="Ubicacion">
+              <group>
+                <field name="norte"/>
+                <field name="este"/>
+                <field name="altura"/>
+                <field name="proyeccion"/>
+              </group>
+            </page>
           </notebook>
         </sheet>
       </form>

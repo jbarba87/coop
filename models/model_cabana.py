@@ -60,3 +60,11 @@ class cabana(models.Model):
   # Datos del socio
   nombre_socio = fields.Char(string="Socio", compute="get_socio")
 
+  # Ubicacion (UTM)
+  norte = fields.Integer(string="Norte")
+  este = fields.Integer(string="Este")
+  altura = fields.Integer(string="Altura")
+  proyeccion = fields.Selection([
+    ('WGS84 18S', 'WGS84 18S'),
+    ('WGS84 19S', 'WGS84 18S'),
+  ], string="Proyeccion")
