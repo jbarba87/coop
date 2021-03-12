@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from odoo import http
 from odoo.http import request
+import json
+import hashlib
+
 # class Coop1(http.Controller):
 #     @http.route('/coop1/coop1/', auth='public')
 #     def index(self, **kw):
@@ -20,7 +23,7 @@ from odoo.http import request
 #         })
 
 class Coop(http.Controller):
-  @http.route('/socios', auth='user')
+  @http.route('/socios', auth='public')
   def index(self, **kw):
     #return "Hello, world"
     socios = request.env['res.partner'].sudo().search([('es_socio', '=', True)])
@@ -32,3 +35,29 @@ class Coop(http.Controller):
       'socios': socios,
       'maximo': maximo,
     })
+
+class get_productor(http.Controller):
+  @http.route('/productor/<string:dni>', auth="public")
+  def index(self, **kw):
+    values = dict(kw)
+    dni = values['dni']
+
+    datos = request.params
+    var = list(datos.items())[0]
+
+    dict_params = json.loads(var[0])
+    usuario = dict_params['usuario']
+    password = dict_params['pass']
+
+    #print("hola desde controller")
+    print(hashlib.sha256(password.encode()).hexdigest())
+    if hashlib.sha256(password.encode()).hexdigest() == '03621896c4979e51e59fe3a27d58066c3923c98a355961907d7c6614a249c86d':
+      socio = request.env['res.partner'].sudo().search([('es_socio', '=', True), ('dni', '=', dni)])
+      if len(socio) is 0:
+        return "No encontrado"
+      else:
+        dat = {'nombre': socio.name, 'dni':socio.dni, 'sexo':socio.sexo}
+        return json.dumps(dat)
+    else:
+      return "No permitido"
+

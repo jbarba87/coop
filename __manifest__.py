@@ -36,6 +36,9 @@
         'views/view_historial.xml',
         'views/view_tablero.xml',
         'views/view_emp.xml',
+        'views/templates_prueba.xml',
+
+
     ],
     # only loaded in demonstration mode
     'demo': [
