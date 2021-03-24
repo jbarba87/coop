@@ -56,6 +56,7 @@ class cabana(models.Model):
   # Campos relacionales
   socio_id = fields.Many2one('res.partner', string="Socio Propietario", required = True)
   parcelas = fields.One2many('coop.parcela', 'cabana_id', string="Parcela")
+
   # comunidad = fields.Many2one('coop.asociacion', string="Comunidad/Asociación")
   # Datos del socio
   nombre_socio = fields.Char(string="Socio", compute="get_socio")

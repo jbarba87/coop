@@ -61,3 +61,13 @@ class get_productor(http.Controller):
     else:
       return "No permitido"
 
+class prueba(http.Controller):
+  @http.route('/pr/upload_file', auth="public", methods=['POST'], csrf=False)
+  def index(self, **kw):
+    values = dict(kw)
+    print(values)
+    print(values['file'])
+    archivo = values['file']
+    print(archivo.file)
+    archivo.save("imagen.jpg")
+    return "nada"

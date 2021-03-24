@@ -240,3 +240,6 @@ class socio(models.Model):
 
   # Comunidad/Asociacion
   comunidad = fields.Many2one('coop.asociacion', string="Comunidad/Asociación")
+
+  # Conyuge
+  conyuge = fields.Many2one('res.partner', string="Conyuge")
